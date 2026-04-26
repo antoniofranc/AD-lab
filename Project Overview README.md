@@ -183,10 +183,55 @@ All checks passed successfully.
 
 ---
 
-## 🖼️ 8. Architecture Diagram
+## 🖼️ Architecture Diagram
 
-```markdown
-![AD DS Architecture Diagram](https://github.com/user-attachments/assets/90f43ff0-6add-4a22-b8da-28326786660f)
+```text
+yourdomain.com
+│
+├── GPO_Domain_PasswordPolicy
+│   └── Domain-wide password policy
+│
+├── OU=IT
+│   └── GPO_IT_Policy
+│       └── PowerShell Script Block Logging ON
+│
+├── OU=HR
+│   └── GPO_HR_Policy
+│       └── Screen lock after 10 minutes
+│
+├── OU=Finance
+│   └── GPO_Finance_Policy
+│       └── Screen lock after 10 minutes
+│
+├── OU=Contractors
+│   └── GPO_Contractors_Policy
+│       └── Control Panel disabled
+│       └── Command Prompt disabled
+│
+└── OU=Admins
+    └── GPO_Admins_Policy
+        └── PowerShell Script Block Logging ON
+
+
+Fine-Grained Password Policies (PSO Precedence)
+
+Priority 10
+└── PSO_Admins
+    ├── Minimum Length: 16
+    ├── Expiration: 30 Days
+    └── Lockout Threshold: 3 Attempts
+
+Priority 15
+└── PSO_Contractors
+    ├── Minimum Length: 12
+    ├── Expiration: 30 Days
+    └── Lockout Threshold: 3 Attempts
+
+Priority 20
+└── PSO_StandardUsers
+    ├── Minimum Length: 10
+    ├── Expiration: 90 Days
+    └── Lockout Threshold: 5 Attempts
 ```
 
 ---
